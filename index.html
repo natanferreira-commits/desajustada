@@ -94,7 +94,6 @@
       text-transform:uppercase;letter-spacing:.01em;
     }
     h1 .prize{color:var(--hot);text-shadow:0 0 22px rgba(255,122,0,.45)}
-    h1 .safe{color:var(--ok)}
 
     /* ===== Comparação de odds ===== */
     .odds{
@@ -226,7 +225,7 @@
     </div>
 
     <div class="pitch">
-      <h1><span class="prize" id="valor">R$ 3.000</span> no seu bolso<br>ou seu <span class="safe">dinheiro de volta</span></h1>
+      <h1 id="headline">De R$ 30 pra <span class="prize">R$ 3.000</span></h1>
 
       <div class="odds">
         <div class="odd-box">
@@ -270,7 +269,18 @@
 
       /* ===== Textos ===== */
       function set(id, txt){ if (txt != null) document.getElementById(id).textContent = txt; }
-      set("valor", C.valor);
+
+      /* Headline: o trecho entre *asteriscos* sai em laranja.
+         Escapa antes de montar, pra o config nunca virar HTML solto. */
+      if (C.headline) {
+        var seguro = String(C.headline).replace(/[&<>"]/g, function(c){
+          return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];
+        });
+        document.getElementById("headline").innerHTML = seguro.split("*").map(function(parte, i){
+          return i % 2 ? '<span class="prize">' + parte + "</span>" : parte;
+        }).join("");
+      }
+
       set("odd-de", C.oddDe);
       set("odd-para", C.oddPara);
       set("cta", C.ctaLabel);

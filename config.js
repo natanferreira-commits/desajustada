@@ -25,9 +25,9 @@ window.LP_CONFIG = {
   selo: 'Bilhete disponível',
 
   /* ===== HEADLINE =====
-     Vira "<valor> no seu bolso ou seu dinheiro de volta".
-     O valor sai em laranja e "dinheiro de volta" em verde. */
-  valor: 'R$ 3.000',
+     O trecho entre *asteriscos* sai em laranja.
+     Esta campanha NÃO tem reembolso: nada de "dinheiro de volta" aqui. */
+  headline: 'De R$ 30 pra *R$ 3.000*',
 
   /* ===== COMPARAÇÃO DE ODD ===== */
   oddDe: 'odd 13.50',
@@ -49,7 +49,8 @@ window.LP_CONFIG = {
   linkSuporte: '',
 
   /* ===== RODAPÉ ===== */
-  termos: 'Proteção promocional independente da casa de apostas, exclusiva para contas novas criadas no mesmo dia através desta página e limitada a uma aposta por pessoa neste bilhete. Devolução via Pix em até 48h mediante comprovante de criação da conta no dia e print do bilhete redado. Apostas esportivas envolvem risco e não existe ganho garantido. Aposte apenas o que você pode perder.',
+  // Sem menção a reembolso: esta campanha não tem devolução.
+  termos: 'Apostas esportivas envolvem risco e não existe ganho garantido. As odds podem mudar ou sair do ar a qualquer momento. Aposte apenas o que você pode perder. Conteúdo destinado a maiores de 18 anos. Este site não faz parte do Facebook Inc. nem é endossado pelo Facebook de nenhuma maneira.',
 
   // Repassa utm_* e fbclid pro link da casa.
   // O link atual é um encurtador limpo (sem query string), então anexar
