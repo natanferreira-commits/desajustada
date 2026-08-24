@@ -6,13 +6,12 @@
   <meta name="theme-color" content="#0b0c10" />
   <meta name="robots" content="noindex, nofollow" />
   <meta name="format-detection" content="telephone=no" />
-  <meta name="description" content="O mesmo bilhete com odd 10x maior. Aposte R$ 10 protegido: se der red, devolvemos." />
-  <title>Desajuste Protegido 🛡️</title>
+  <meta name="description" content="R$ 3.000 no seu bolso ou seu dinheiro de volta. De odd 9 pra odd 100 no mesmo bilhete." />
+  <title>R$ 3.000 no seu bolso ou seu dinheiro de volta</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://connect.facebook.net" crossorigin />
-
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Anton&family=Sora:wght@400;600;700&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Sora:wght@400;600;700&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Sora:wght@400;600;700&display=swap" /></noscript>
@@ -21,257 +20,161 @@
 
   <style>
     :root{
-      --bg:#0b0c10;
-      --bg-2:#12141a;
-      --card:#171a21;
-      --border:#262b34;
-      --hot:#ff7a00;          /* laranja BetWarrior */
-      --hot-2:#ff9d33;
-      --hot-deep:#331500;
-      --ok:#25d366;
-      --danger:#ff4d4d;
-      --text:#f4f5f7;
-      --muted:#a5acb8;
+      --bg:#0b0c10; --bg-2:#12141a; --card:#171a21; --border:#262b34;
+      --hot:#ff7a00; --hot-2:#ff9d33; --hot-deep:#c25a00;
+      --ok:#25d366; --text:#f4f5f7; --muted:#a5acb8;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
+    html,body{height:100%}
     body{
       background:
-        radial-gradient(120% 60% at 50% -10%, rgba(255,122,0,.14) 0%, rgba(255,122,0,0) 55%),
-        linear-gradient(180deg,var(--bg-2) 0%,var(--bg) 50%);
-      background-attachment:fixed;
+        radial-gradient(120% 50% at 50% -8%, rgba(255,122,0,.14) 0%, rgba(255,122,0,0) 55%),
+        linear-gradient(180deg,var(--bg-2) 0%,var(--bg) 55%);
       color:var(--text);
       font-family:"Sora",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-      -webkit-font-smoothing:antialiased;
-      -webkit-text-size-adjust:100%;
-      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;
+      overflow:hidden;                     /* tela única: zero rolagem */
     }
-    .wrap{max-width:460px;margin:0 auto;padding:0 18px 110px}
 
-    /* ===== Barra de urgência ===== */
-    .urgency{
-      position:sticky;top:0;z-index:40;
-      display:flex;align-items:center;justify-content:center;gap:10px;
-      padding:10px 14px;
-      background:rgba(11,12,16,.92);
-      backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-      border-bottom:1px solid var(--border);
-      font-size:12px;font-weight:600;color:var(--muted);
+    /* Coluna única de altura fixa. A arte é o único bloco elástico:
+       ela absorve a sobra e cede espaço quando o resto precisa. */
+    .screen{
+      height:100svh; height:100dvh;
+      max-width:460px;margin:0 auto;
+      display:flex;flex-direction:column;
+      padding:0 16px calc(max(env(safe-area-inset-bottom),8px));
     }
-    .urgency b{color:var(--hot);font-weight:700}
-    .urgency .clock{font-variant-numeric:tabular-nums;color:var(--text);font-weight:700}
 
-    /* ===== Banner vertical (recortado) ===== */
-    .banner{
-      position:relative;
-      width:100%;max-width:460px;margin:0 auto;
-      aspect-ratio:9/16;                 /* arte vertical 1080x1920 */
-      --bu:1vh;
-      max-height:calc(var(--banner-pct,60) * var(--bu));  /* recorte: só uma fatia da arte */
-      overflow:hidden;
-      background:var(--bg-2);
-      contain:paint;
+    /* ===== Selo ===== */
+    .topbar{
+      flex:0 0 auto;
+      display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;
+      padding:clamp(5px,1svh,9px) 4px;
     }
-    .banner img{
+    .selo{
+      display:inline-flex;align-items:center;gap:7px;
+      padding:4px 10px;border-radius:999px;
+      background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.42);
+      font-size:10.5px;font-weight:700;letter-spacing:.07em;
+      text-transform:uppercase;color:var(--ok);white-space:nowrap;
+    }
+    .selo .dot{
+      width:6px;height:6px;border-radius:50%;background:var(--ok);
+      animation:pulse 1.8s cubic-bezier(0,0,.2,1) infinite;
+    }
+    @keyframes pulse{
+      0%{box-shadow:0 0 0 0 rgba(37,211,102,.6)}
+      70%{box-shadow:0 0 0 8px rgba(37,211,102,0)}
+      100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
+    }
+    .clock{font-size:10.5px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+    /* ===== Arte ===== */
+    .art{
+      flex:1 1 auto;min-height:84px;
+      position:relative;display:flex;
+      border-radius:14px;overflow:hidden;
+    }
+    .art img{
       width:100%;height:100%;display:block;
-      object-fit:cover;
-      object-position:var(--banner-foco,center);
+      object-fit:var(--art-fit,contain);object-position:center;
     }
-    /* fade da arte pro fundo da página, pra não ficar um corte seco */
-    .banner::after{
-      content:"";position:absolute;inset:auto 0 -1px 0;height:42%;
-      background:linear-gradient(180deg,rgba(11,12,16,0) 0%,rgba(11,12,16,.72) 58%,var(--bg) 100%);
-      pointer-events:none;
+    .art.vazio{
+      border:1.5px dashed rgba(255,122,0,.35);
+      background:rgba(255,122,0,.04);
+      align-items:center;justify-content:center;
+      color:#5b6270;font-size:12px;text-align:center;padding:14px;
     }
-    /* svh: no mobile o recorte não muda quando a barra do navegador some */
-    @supports (height:1svh){ .banner{--bu:1svh} }
-    /* tela curta: encolhe o recorte pra o comparativo de odds não sair da primeira dobra */
-    @media (max-height:700px){
-      .banner{max-height:calc(var(--banner-pct,60) * .78 * var(--bu))}
-    }
-    /* com banner o hero encosta na arte, sem respiro dobrado */
-    body.has-banner .wrap{margin-top:-12px}
-    body.has-banner .hero{padding-top:14px}
 
-    .hero{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;padding-top:26px}
-    .tag{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:6px 13px;border-radius:999px;
-      background:rgba(255,77,77,.12);
-      border:1px solid rgba(255,77,77,.35);
-      font-size:12px;font-weight:700;letter-spacing:.08em;
-      text-transform:uppercase;color:var(--danger);
-    }
-    .tag .ping{
-      width:8px;height:8px;border-radius:50%;background:var(--danger);
-      animation:ping 1.6s cubic-bezier(0,0,.2,1) infinite;
-    }
-    @keyframes ping{
-      0%{box-shadow:0 0 0 0 rgba(255,77,77,.55)}
-      70%{box-shadow:0 0 0 9px rgba(255,77,77,0)}
-      100%{box-shadow:0 0 0 0 rgba(255,77,77,0)}
-    }
+    /* ===== Headline ===== */
+    .pitch{flex:0 0 auto;padding-top:clamp(7px,1.2svh,11px);text-align:center}
     h1{
       font-family:"Anton",Impact,sans-serif;font-weight:400;
-      font-size:clamp(30px,9vw,42px);line-height:1.04;
-      letter-spacing:.01em;text-transform:uppercase;
+      font-size:clamp(23px,6.9vw,32px);line-height:1.04;
+      text-transform:uppercase;letter-spacing:.01em;
     }
-    h1 .hl{color:var(--hot);text-shadow:0 0 24px rgba(255,122,0,.45)}
-    .sub{font-size:clamp(13.5px,3.9vw,15.5px);line-height:1.5;color:var(--muted);max-width:400px}
-    .sub strong{color:var(--text)}
+    h1 .prize{color:var(--hot);text-shadow:0 0 22px rgba(255,122,0,.45)}
+    h1 .safe{color:var(--ok)}
 
-    /* ===== Comparativo ===== */
-    .versus{width:100%;display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:stretch;margin-top:6px}
-    .house{
-      display:flex;flex-direction:column;align-items:center;gap:6px;
-      padding:16px 10px 14px;border-radius:16px;
+    /* ===== Comparação de odds ===== */
+    .odds{
+      display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;gap:8px;
+      margin-top:clamp(7px,1.1svh,11px);
+    }
+    .odd-box{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
+      padding:clamp(6px,.9svh,9px) 6px;border-radius:10px;
       background:var(--card);border:1px solid var(--border);
     }
-    .house .name{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-    .house .odd{font-family:"Anton",Impact,sans-serif;font-size:clamp(25px,7.5vw,36px);line-height:1;white-space:nowrap}
-    .house .label{font-size:11px;color:var(--muted)}
-    .house.win{
-      background:linear-gradient(180deg,rgba(255,122,0,.16) 0%,rgba(255,122,0,.05) 100%);
-      border:1.5px solid rgba(255,122,0,.55);
-      box-shadow:0 0 30px rgba(255,122,0,.18);
+    .odd-box .n{
+      font-family:"Anton",Impact,sans-serif;
+      font-size:clamp(20px,6vw,27px);line-height:1;white-space:nowrap;
     }
-    .house.win .name,.house.win .odd{color:var(--hot-2)}
-    .vs{
-      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
-      font-family:"Anton",Impact,sans-serif;font-size:14px;color:var(--muted);
+    .odd-box .l{font-size:9.5px;color:var(--muted);letter-spacing:.03em;text-transform:uppercase}
+    .odd-box.win{
+      background:linear-gradient(180deg,rgba(255,122,0,.16),rgba(255,122,0,.05));
+      border:1.5px solid rgba(255,122,0,.5);
     }
-    .vs-mult{
-      font-family:"Sora",sans-serif;font-weight:700;font-style:normal;
-      font-size:12px;color:var(--hot-2);
-      padding:3px 8px;border-radius:999px;
-      background:rgba(255,122,0,.12);border:1px solid rgba(255,122,0,.4);
-      white-space:nowrap;
+    .odd-box.win .n{color:var(--hot-2)}
+    .odd-sep{
+      display:flex;align-items:center;justify-content:center;
+      font-family:"Anton",Impact,sans-serif;font-size:17px;color:var(--hot);
     }
 
-    /* ===== Simulação ===== */
-    .section{margin-top:28px}
-    h2{
-      font-family:"Anton",Impact,sans-serif;font-weight:400;
-      font-size:clamp(19px,5.6vw,25px);text-transform:uppercase;letter-spacing:.02em;
-      text-align:center;margin-bottom:13px;
-      padding:0 4px;
-    }
-    h2 .hl{color:var(--hot)}
-    .sim{
-      display:flex;flex-direction:column;gap:9px;
-    }
-    .sim-row{
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
-      padding:14px 15px;border-radius:14px;
-      background:var(--card);border:1px solid var(--border);
-      font-size:clamp(12.5px,3.6vw,14px);
-    }
-    .sim-row .casa{font-weight:700;color:var(--muted)}
-    .sim-row .valor{font-family:"Anton",Impact,sans-serif;font-size:clamp(18px,5.5vw,22px);white-space:nowrap}
-    .sim-row.win{border:1.5px solid rgba(255,122,0,.55);background:linear-gradient(90deg,rgba(255,122,0,.13),rgba(255,122,0,.03))}
-    .sim-row.win .valor{color:var(--hot-2)}
-    .sim-row.safe{border:1.5px solid rgba(37,211,102,.5);background:linear-gradient(90deg,rgba(37,211,102,.12),rgba(37,211,102,.03))}
-    .sim-row.safe .valor{color:var(--ok)}
-    .sim-note{margin-top:8px;font-size:12px;color:var(--muted);text-align:center}
-
-    /* ===== Prints ===== */
-    .prints{display:flex;flex-direction:column;gap:12px}
-    .print{
-      border-radius:14px;overflow:hidden;
-      border:1px solid var(--border);
-      background:var(--card);
-    }
-    .print img{width:100%;display:block}
-    .print .cap{padding:9px 12px;font-size:12px;color:var(--muted);border-top:1px solid var(--border)}
-
-    /* ===== Bilhete ===== */
-    .games{display:flex;flex-direction:column;gap:9px}
-    .game{
-      padding:13px 15px;border-radius:14px;
-      background:var(--card);border:1px solid var(--border);
-    }
-    .game .match{font-weight:700;font-size:14.5px}
-    .game .mkt{font-size:12.5px;color:var(--muted);margin-top:3px}
-    .game .sel{font-size:13px;color:var(--hot-2);font-weight:600;margin-top:3px}
-
-    /* ===== Passos ===== */
-    .steps{display:flex;flex-direction:column;gap:9px;counter-reset:passo}
-    .step{
-      display:flex;align-items:center;gap:12px;
-      padding:13px 15px;border-radius:14px;
-      background:var(--card);border:1px solid var(--border);
-      font-size:clamp(13.5px,3.9vw,14.5px);line-height:1.45;
-    }
-    .step .n{
-      counter-increment:passo;flex-shrink:0;
-      width:28px;height:28px;border-radius:50%;
-      display:grid;place-items:center;
-      background:rgba(255,122,0,.15);color:var(--hot-2);
-      font-weight:700;font-size:14px;
-    }
-    .step .n::before{content:counter(passo)}
-    .step strong{color:var(--text)}
-
-    /* ===== CTA ===== */
+    /* ===== Botão =====
+       Chapado, canto reto e aresta inferior sólida no lugar do brilho.
+       Sem gradiente, sem glow e sem animação pulsando. */
     .cta{
-      display:flex;align-items:center;justify-content:center;gap:10px;
-      width:100%;min-height:58px;padding:16px 22px;
-      background:linear-gradient(180deg,var(--hot) 0%,#e56d00 100%);
-      color:#fff;
-      font:700 clamp(15px,4.4vw,17px)/1.15 "Sora",sans-serif;
-      letter-spacing:.02em;text-transform:uppercase;
-      text-decoration:none;border-radius:14px;
-      box-shadow:0 10px 30px rgba(255,122,0,.35);
-      transition:transform .15s ease,filter .15s ease;
+      display:flex;align-items:center;justify-content:center;
+      width:100%;
+      min-height:clamp(54px,7.6svh,64px);
+      margin-top:clamp(9px,1.4svh,13px);padding:14px 18px;
+      background:var(--hot);color:#fff;
+      font:700 clamp(15px,4.4vw,18px)/1.15 "Sora",sans-serif;
+      letter-spacing:.03em;text-transform:uppercase;text-align:center;
+      text-decoration:none;
+      border-radius:8px;
+      border-bottom:3px solid var(--hot-deep);
       -webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none;
-      animation:breathe 2.2s ease-in-out infinite;cursor:pointer;text-align:center;
+      cursor:pointer;
+      transition:background .12s ease,transform .12s ease,border-bottom-width .12s ease;
     }
-    .cta:active{transform:scale(.98);filter:brightness(.97)}
-    @keyframes breathe{
-      0%,100%{box-shadow:0 10px 30px rgba(255,122,0,.35);transform:translateY(0)}
-      50%{box-shadow:0 14px 42px rgba(255,122,0,.55);transform:translateY(-2px)}
+    .cta:active{
+      background:#f07300;
+      transform:translateY(2px);
+      border-bottom-width:1px;
     }
-    .cta-sub{display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;color:var(--muted);margin-top:8px}
-    .cta-ghost{
-      display:flex;align-items:center;justify-content:center;gap:8px;
-      width:100%;min-height:52px;margin-top:12px;padding:14px 18px;
-      background:var(--card);color:var(--text);
-      font:700 14px/1.2 "Sora",sans-serif;
-      text-decoration:none;border-radius:12px;
-      border:1.5px solid rgba(255,77,77,.45);
-      box-shadow:0 4px 14px rgba(0,0,0,.35);
-      -webkit-tap-highlight-color:transparent;cursor:pointer;
-      transition:transform .15s ease,filter .15s ease;
-    }
-    .cta-ghost:active{transform:scale(.98);filter:brightness(1.15)}
 
-    /* CTA fixo mobile */
-    .sticky-cta{
-      position:fixed;left:0;right:0;bottom:0;z-index:50;
-      padding:10px 14px calc(max(env(safe-area-inset-bottom),10px));
-      background:rgba(11,12,16,.94);
-      backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-      border-top:1px solid var(--border);
+    /* ===== Rodapé ===== */
+    .rodape{
+      flex:0 0 auto;
+      margin-top:clamp(7px,1.1svh,10px);
+      text-align:center;
     }
-    .sticky-cta .cta{min-height:52px;animation:none;max-width:460px;margin:0 auto}
-
-    .responsible{
-      display:flex;align-items:center;justify-content:center;gap:8px;
-      font-size:12px;font-weight:600;color:var(--muted);margin-top:26px;
+    .rodape .idade{
+      display:flex;align-items:center;justify-content:center;gap:6px;
+      font-size:10.5px;font-weight:600;color:var(--muted);
     }
-    .responsible .age{
+    .rodape .age{
       display:inline-grid;place-items:center;
-      min-width:30px;height:22px;padding:0 6px;border-radius:6px;
-      background:#c62828;color:#fff;font-weight:700;font-size:12px;
+      min-width:26px;height:18px;padding:0 5px;border-radius:4px;
+      background:#c62828;color:#fff;font-weight:700;font-size:10px;
     }
-    .footer{
-      font-size:9px;line-height:1.45;color:#5b6270;text-align:center;
-      padding:14px 6px 0;opacity:.85;
+    .rodape .termos{
+      margin-top:4px;
+      font-size:8.5px;line-height:1.35;color:#5b6270;
     }
-    @media (prefers-reduced-motion:reduce){.cta,.ping{animation:none}}
+    .rodape a{color:#5b6270;text-decoration:underline;text-underline-offset:2px}
+
+    /* caso extremo (paisagem, teclado aberto): melhor rolar do que cortar o CTA */
+    @media (max-height:520px){
+      body{overflow:auto}
+      .screen{height:auto;min-height:100dvh}
+      .art{min-height:140px}
+    }
+    @media (prefers-reduced-motion:reduce){.selo .dot{animation:none}}
   </style>
 
-  <!-- ===== Config da campanha (edite config.js, não este arquivo) ===== -->
   <script src="config.js"></script>
 
   <!-- ===== Meta Pixel ===== -->
@@ -283,240 +186,136 @@
   </script>
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=23904277939190271&ev=PageView&noscript=1" alt="" /><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2392917637871836&ev=PageView&noscript=1" alt="" /></noscript>
 
-  <!-- Vercel Analytics + Speed Insights -->
   <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
   <script defer src="/_vercel/insights/script.js"></script>
-  <script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
 
-  <div class="urgency">
-    <span>🛡️ Proteção válida só até o jogo começar</span>
-    <span class="clock" id="clock">--:--:--</span>
-  </div>
+  <main class="screen">
 
-  <div class="banner" id="banner" hidden>
-    <img id="banner-img" src="" alt="" fetchpriority="high" decoding="async" width="1080" height="1920" />
-  </div>
-  <script>
-    /* roda aqui em cima (e não no rodapé) pra arte do topo entrar na fila cedo — é o LCP da página */
-    (function(){
-      var C   = window.LP_CONFIG || {};
-      var box = document.getElementById("banner");
-      var img = document.getElementById("banner-img");
-      if (!C.banner){ box.remove(); return; }
+    <div class="topbar">
+      <span class="selo"><span class="dot"></span><span id="selo-txt">Bilhete disponível</span></span>
+      <span class="clock" id="clock"></span>
+    </div>
 
-      var FOCOS = { topo:"center top", centro:"center", baixo:"center bottom" };
-      box.style.setProperty("--banner-foco", FOCOS[C.bannerFoco] || C.bannerFoco || "center");
-      box.style.setProperty("--banner-pct", Number(C.bannerAltura) || 60);
+    <div class="art" id="art">
+      <img id="art-img" src="" alt="" fetchpriority="high" decoding="async" />
+    </div>
 
-      /* arte faltando não deixa buraco na página */
-      img.addEventListener("error", function(){
-        box.remove();
-        document.body.classList.remove("has-banner");
-      });
-      img.src = C.banner;
-      box.hidden = false;
-      document.body.classList.add("has-banner");
-    })();
-  </script>
+    <div class="pitch">
+      <h1><span class="prize" id="valor">R$ 3.000</span> no seu bolso<br>ou seu <span class="safe">dinheiro de volta</span></h1>
 
-  <div class="wrap">
-
-    <header class="hero">
-      <h1><span class="hl" id="hero-ganho">R$ 1.132</span> no seu bolso<br>ou seu dinheiro de volta</h1>
-
-      <div class="versus">
-        <div class="house">
-          <span class="name">Bet365</span>
-          <span class="odd" id="odd-365">5.00</span>
-          <span class="label">odd normal</span>
+      <div class="odds">
+        <div class="odd-box">
+          <span class="n" id="odd-de">odd 9</span>
+          <span class="l">nas outras casas</span>
         </div>
-        <span class="vs">VS<b class="vs-mult" id="multi-badge">10x</b></span>
-        <div class="house win">
-          <span class="name">BetWarrior</span>
-          <span class="odd" id="odd-bw">50.00</span>
-          <span class="label">odd desajustada</span>
+        <span class="odd-sep">&rarr;</span>
+        <div class="odd-box win">
+          <span class="n" id="odd-para">odd 100</span>
+          <span class="l">nesse bilhete</span>
         </div>
       </div>
-    </header>
 
-    <section class="section">
-      <h2>Seus <span class="hl" id="sim-title">R$ 10</span> só têm dois finais</h2>
-      <div class="sim">
-        <div class="sim-row win">
-          <span class="casa" id="sim-casa-win">✅ Bateu: seus R$ 10 viram</span>
-          <span class="valor" id="sim-win">R$ 500,00</span>
-        </div>
-        <div class="sim-row safe">
-          <span class="casa" id="sim-casa-safe">🛡️ Deu red: devolvemos seus</span>
-          <span class="valor" id="sim-safe">R$ 10,00</span>
-        </div>
-      </div>
-      <p class="sim-note" id="sim-note">Na Bet365, o mesmo bilhete pagaria bem menos. E lá red é red: ninguém devolve nada.</p>
-    </section>
+      <a id="cta" class="cta" href="#" rel="noopener">Quero esse bilhete</a>
+    </div>
 
-    <section class="section">
-      <h2>Leia com atenção as <span class="hl">regras da proteção</span></h2>
-      <div class="steps">
-        <div class="step"><span class="n"></span><span><strong>Só vale pra conta nova</strong>, criada hoje na BetWarrior pelo botão desta página.</span></div>
-        <div class="step"><span class="n"></span><span>Aposte <strong>exatamente R$ 10</strong> nesse bilhete.</span></div>
-        <div class="step"><span class="n"></span><span><strong>Bateu?</strong> O pagamento cai direto na sua conta da casa. O lucro é todo seu.</span></div>
-        <div class="step"><span class="n"></span><span><strong>Deu red?</strong> Manda o <strong>comprovante da conta criada no dia</strong> junto com o <strong>print do bilhete redado</strong> no nosso suporte e devolvemos seus R$ 10 no Pix.</span></div>
-      </div>
-      <a id="cta-reembolso" class="cta-ghost" href="#" rel="noopener">🔴 Deu red? Pedir reembolso no suporte</a>
-    </section>
-
-    <section class="section" id="prints-section">
-      <h2>Print das <span class="hl">duas casas</span></h2>
-      <div class="prints">
-        <div class="print">
-          <img id="print-365" src="assets/print-bet365.jpg" alt="Print do bilhete na Bet365" loading="lazy" />
-          <div class="cap">Bilhete na Bet365, odd normal</div>
-        </div>
-        <div class="print">
-          <img id="print-bw" src="assets/print-betwarrior.jpg" alt="Print do bilhete na BetWarrior" loading="lazy" />
-          <div class="cap">O mesmo bilhete na BetWarrior, odd desajustada</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Como <span class="hl">aproveitar</span></h2>
-      <div class="steps">
-        <div class="step"><span class="n"></span><span><strong>Crie sua conta</strong> pelo botão laranja</span></div>
-        <div class="step"><span class="n"></span><span><strong>Deposite</strong> R$ 10</span></div>
-        <div class="step"><span class="n"></span><span><strong>Pegue o bilhete</strong> e aposte antes do jogo começar</span></div>
-      </div>
-    </section>
-
-    <section class="section">
-      <a id="cta-final" class="cta" href="#" rel="noopener">🛡️ Apostar R$ 10 protegido</a>
-      <p class="cta-sub">Deu red, devolveu. Proteção válida até o primeiro jogo começar.</p>
-    </section>
-
-    <p class="responsible"><span class="age">+18</span> Jogue com responsabilidade</p>
-
-    <footer class="footer">
-      <p>Proteção promocional independente da casa de apostas: exclusiva para contas novas criadas no mesmo dia através desta página, limitada a uma aposta de R$ 10 por pessoa neste bilhete, válida até o início do primeiro jogo. Devolução via Pix mediante envio do comprovante de criação da conta no dia e do print do bilhete redado. Apostas esportivas envolvem risco e não existe ganho garantido. Aposte apenas o que você pode perder. Conteúdo destinado a maiores de 18 anos. Este site não faz parte do Facebook Inc. nem é endossado pelo Facebook de nenhuma maneira. FACEBOOK é uma marca comercial independente da FACEBOOK, Inc.</p>
+    <footer class="rodape">
+      <p class="idade"><span class="age">+18</span> Jogue com responsabilidade <a id="suporte" href="#" rel="noopener">Suporte</a></p>
+      <p class="termos" id="termos"></p>
     </footer>
-  </div>
 
-  <div class="sticky-cta">
-    <a id="cta-sticky" class="cta" href="#" rel="noopener">🛡️ Apostar R$ 10 protegido</a>
-  </div>
+  </main>
 
   <script>
     (function(){
       "use strict";
+      var C = window.LP_CONFIG || {};
 
-      /* ===== DEFAULTS — edite config.js, não aqui ===== */
-      var CAMPAIGN = {
-        odd365: 7.43,                 // odd do bilhete na Bet365
-        oddBetwarrior: 136.4,         // odd do MESMO bilhete na BetWarrior
-        valorAposta: 10,              // valor protegido da aposta (R$)
-        deadline: "2026-08-23T16:00:00-03:00", // horário do primeiro jogo
-        link: "https://record.betwarrioraffiliates.bet/_xW2WawVor-n-dmz6Y9QluGNd7ZgqdRLk/19/??coupon=combination|4292788997,4292789098,4293977048,4292758440,4292761151,4292755856|0|replace", // bilhete pronto BetWarrior (afiliado)
-        linkSuporte: "https://t.me/suportecaumobot?start=6a871fc6f017077da5066e79" // suporte p/ reembolso
-      };
-      /* config.js sobrescreve os defaults acima */
-      var USER = window.LP_CONFIG || {};
-      for (var k in USER){ if (Object.prototype.hasOwnProperty.call(USER,k)) CAMPAIGN[k] = USER[k]; }
-      /* ==================================================== */
+      /* ===== Arte ===== */
+      var art = document.getElementById("art");
+      var img = document.getElementById("art-img");
+      art.style.setProperty("--art-fit", C.arteAjuste === "cover" ? "cover" : "contain");
 
-      function brl(v){ return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"}); }
-      function odd(v){ return v.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2}); }
-
-      var mult = CAMPAIGN.oddBetwarrior / CAMPAIGN.odd365;
-      var multTxt = (Math.round(mult*10)/10).toLocaleString("pt-BR") + "x";
-      var ganhoTxt = brl(Math.round(CAMPAIGN.valorAposta * CAMPAIGN.oddBetwarrior)).replace(",00","");
-      document.getElementById("odd-365").textContent = odd(CAMPAIGN.odd365);
-      document.getElementById("odd-bw").textContent = odd(CAMPAIGN.oddBetwarrior);
-      document.getElementById("multi-badge").textContent = multTxt;
-      document.getElementById("hero-ganho").textContent = ganhoTxt;
-      document.getElementById("sim-title").textContent = brl(CAMPAIGN.valorAposta).replace(",00","");
-      document.getElementById("sim-casa-win").textContent = "✅ Bateu: seus " + brl(CAMPAIGN.valorAposta).replace(",00","") + " viram";
-      document.getElementById("sim-win").textContent = brl(CAMPAIGN.valorAposta * CAMPAIGN.oddBetwarrior);
-      document.getElementById("sim-casa-safe").textContent = "🛡️ Deu red: devolvemos seus";
-      document.getElementById("sim-safe").textContent = brl(CAMPAIGN.valorAposta);
-      document.getElementById("sim-note").textContent = "Na Bet365, o mesmo bilhete pagaria só " + brl(CAMPAIGN.valorAposta * CAMPAIGN.odd365) + ". E lá red é red: ninguém devolve nada.";
-
-      /* esconde os prints enquanto as imagens nao existirem */
-      function hidePrint(img){
-        img.closest(".print").style.display = "none";
-        var visiveis = [].filter.call(document.querySelectorAll("#prints-section .print"), function(el){ return el.style.display !== "none"; });
-        if (!visiveis.length) document.getElementById("prints-section").style.display = "none";
+      function semArte(){
+        if (img.parentNode) img.remove();
+        art.classList.add("vazio");
+        art.textContent = "espaço da arte — coloque o arquivo em /assets e aponte em config.js";
       }
-      ["print-365","print-bw"].forEach(function(id){
-        var img = document.getElementById(id);
-        if (img.complete && img.naturalWidth === 0) { hidePrint(img); return; }
-        img.addEventListener("error", function(){ hidePrint(img); });
-      });
+      if (!C.arte) { semArte(); }
+      else { img.addEventListener("error", semArte); img.src = C.arte; }
 
-      /* Cronômetro até o primeiro jogo */
-      var target = new Date(CAMPAIGN.deadline).getTime();
-      var clock = document.getElementById("clock");
+      /* ===== Textos ===== */
+      function set(id, txt){ if (txt != null) document.getElementById(id).textContent = txt; }
+      set("valor", C.valor);
+      set("odd-de", C.oddDe);
+      set("odd-para", C.oddPara);
+      set("cta", C.ctaLabel);
+      set("selo-txt", C.selo);
+      set("termos", C.termos);
+      if (C.valor) document.title = C.valor + " no seu bolso ou seu dinheiro de volta";
+
+      /* ===== Contagem =====
+         O selo fica sempre "disponível". A contagem é reforço ao lado e some
+         quando o prazo passa: a página nunca diz que a pessoa chegou tarde. */
+      var clock  = document.getElementById("clock");
+      var target = C.deadline ? new Date(C.deadline).getTime() : 0;
       function pad(n){ return String(n).padStart(2,"0"); }
       function tick(){
         var diff = target - Date.now();
-        if (diff <= 0){ clock.textContent = "jogo iniciado"; return; }
+        if (!target || diff <= 0){ clock.textContent = ""; return; }
         var h = Math.floor(diff/3600000), m = Math.floor(diff/60000)%60, s = Math.floor(diff/1000)%60;
-        clock.textContent = (h>=24 ? Math.floor(h/24)+"d " : "") + pad(h%24)+":"+pad(m)+":"+pad(s);
+        clock.textContent = "sai do ar em " + (h>=24 ? Math.floor(h/24)+"d " : "") + pad(h%24)+":"+pad(m)+":"+pad(s);
         setTimeout(tick, 1000);
       }
       tick();
 
-      /* UTMs repassadas no clique + evento Lead */
-      var p = new URLSearchParams(location.search);
-      var uS = p.get("utm_source") || "direct";
-      var uC = p.get("utm_campaign") || "organic";
-      var uCt = p.get("utm_content") || "default";
-      var uM = p.get("utm_medium") || "";
-      var FINAL = CAMPAIGN.link + (CAMPAIGN.link.indexOf("?") === -1 ? (location.search || "") : "");
+      /* ===== Link + evento ===== */
+      var p   = new URLSearchParams(location.search);
+      var uS  = p.get("utm_source")   || "direct";
+      var uC  = p.get("utm_campaign") || "organic";
+      var uCt = p.get("utm_content")  || "default";
+      var uM  = p.get("utm_medium")   || "";
+
+      var destino = C.link || "#";
+      if (C.repassarParametros && location.search) {
+        destino += (destino.indexOf("?") === -1 ? "?" : "&") + location.search.slice(1);
+      }
 
       var eventId = "lead_" + Date.now() + "_" + Math.random().toString(36).slice(2,10);
       var fired = false;
       function fire(){
         if (fired) return; fired = true;
         if (typeof window.fbq === "function") {
-          window.fbq("track","Lead",{content_name:"Desajuste Protegido",content_category:uC,source:uS,utm_medium:uM,utm_content:uCt},{eventID:eventId});
+          window.fbq("track","Lead",{content_name:"30 pra 3000",content_category:uC,source:uS,utm_medium:uM,utm_content:uCt},{eventID:eventId});
         }
         if (typeof window.va === "function") {
-          window.va("event",{name:"clique_desajuste",data:{source:uS,campaign:uC,content:uCt,medium:uM}});
+          window.va("event",{name:"clique_3000",data:{source:uS,campaign:uC,content:uCt,medium:uM}});
         }
       }
-      var reemb = document.getElementById("cta-reembolso");
-      reemb.href = CAMPAIGN.linkSuporte;
-      reemb.target = "_blank";
-      reemb.rel = "noopener";
-      reemb.addEventListener("click", function(){
-        if (typeof window.fbq === "function") {
-          window.fbq("trackCustom","RefundRequest",{content_name:"Desajuste Protegido"});
-        }
-        if (typeof window.va === "function") {
-          window.va("event",{name:"clique_reembolso",data:{source:uS,campaign:uC}});
-        }
-      });
 
-      /* abre em nova aba: a landing fica aberta pro lead consultar regras e reembolso */
-      ["cta-final","cta-sticky"].forEach(function(id){
-        var el = document.getElementById(id);
-        el.href = FINAL;
-        el.target = "_blank";
-        el.rel = "noopener";
-        el.addEventListener("pointerdown", fire, {passive:true});
-        el.addEventListener("click", fire);
-      });
+      var cta = document.getElementById("cta");
+      cta.href = destino; cta.target = "_blank"; cta.rel = "noopener";
+      cta.addEventListener("pointerdown", fire, {passive:true});
+      cta.addEventListener("click", fire);
+
+      var sup = document.getElementById("suporte");
+      if (C.linkSuporte) {
+        sup.href = C.linkSuporte; sup.target = "_blank"; sup.rel = "noopener";
+        sup.addEventListener("click", function(){
+          if (typeof window.fbq === "function") window.fbq("trackCustom","SupportClick",{content_name:"30 pra 3000"});
+        });
+      } else { sup.remove(); }
     })();
   </script>
+
   <script>
     (function(){
       var HUB='https://hub-omega-sooty.vercel.app';
       fetch(HUB+'/api/track',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({page:'desajuste',event:'pageview',referrer:document.referrer}),
+        body:JSON.stringify({page:'3000',event:'pageview',referrer:document.referrer}),
         keepalive:true
       }).catch(function(){});
     })();
