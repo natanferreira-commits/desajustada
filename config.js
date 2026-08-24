@@ -24,8 +24,8 @@ window.LP_CONFIG = {
   valor: 'R$ 3.000',
 
   /* ===== COMPARAÇÃO DE ODD ===== */
-  oddDe: 'odd 9',
-  oddPara: 'odd 100',
+  oddDe: 'odd 13.50',
+  oddPara: 'odd 102.7',
 
   /* ===== CAMPANHA ===== */
   ctaLabel: 'Quero esse bilhete',
