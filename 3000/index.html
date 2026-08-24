@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0c10" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="description" content="De R$ 30 pra R$ 3.000 no mesmo bilhete. Deu red, reembolso no Pix." />
+  <title>De R$ 30 pra R$ 3.000</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://connect.facebook.net" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Anton&family=Sora:wght@400;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Sora:wght@400;600;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Sora:wght@400;600;700&display=swap" /></noscript>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚨%3C/text%3E%3C/svg%3E">
+
+  <style>
+    :root{
+      --bg:#0b0c10; --bg-2:#12141a; --card:#171a21; --border:#262b34;
+      --hot:#ff7a00; --hot-2:#ff9d33; --ok:#25d366; --danger:#ff4d4d;
+      --text:#f4f5f7; --muted:#a5acb8;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      background:
+        radial-gradient(120% 55% at 50% -8%, rgba(255,122,0,.16) 0%, rgba(255,122,0,0) 55%),
+        linear-gradient(180deg,var(--bg-2) 0%,var(--bg) 55%);
+      color:var(--text);
+      font-family:"Sora",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;
+      overflow:hidden;                     /* tela única: nada de rolagem */
+    }
+
+    /* A tela toda é uma coluna. A arte absorve a sobra, então o CTA
+       nunca sai do campo de visão, em qualquer altura de aparelho. */
+    .screen{
+      height:100svh; height:100dvh;
+      max-width:460px;margin:0 auto;
+      display:flex;flex-direction:column;
+      padding:0 16px calc(max(env(safe-area-inset-bottom),12px));
+    }
+
+    .topbar{
+      flex:0 0 auto;
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      padding:9px 4px 8px;
+      font-size:11.5px;font-weight:600;color:var(--muted);
+    }
+    .topbar .clock{font-variant-numeric:tabular-nums;color:var(--hot-2);font-weight:700}
+
+    /* ===== Arte (os bilhetes moram aqui) ===== */
+    .art{
+      flex:1 1 auto;min-height:96px;   /* encolhe até caber, nunca some de vez */
+      position:relative;display:flex;
+      border-radius:16px;overflow:hidden;
+    }
+    .art img{
+      width:100%;height:100%;display:block;
+      object-fit:var(--art-fit,contain);
+      object-position:center;
+    }
+    /* sem arte configurada: moldura marcando o espaço, pra LP nunca ficar quebrada */
+    .art.vazio{
+      border:1.5px dashed rgba(255,122,0,.35);
+      background:rgba(255,122,0,.04);
+      align-items:center;justify-content:center;
+      color:#5b6270;font-size:12.5px;text-align:center;padding:16px;
+    }
+
+    /* ===== Pitch ===== */
+    .pitch{flex:0 0 auto;padding-top:14px;text-align:center}
+    h1{
+      font-family:"Anton",Impact,sans-serif;font-weight:400;
+      font-size:clamp(28px,8.6vw,40px);line-height:1.05;
+      text-transform:uppercase;letter-spacing:.01em;
+    }
+    h1 .de{color:var(--muted)}
+    h1 .para{color:var(--hot);text-shadow:0 0 26px rgba(255,122,0,.5)}
+    .sub{
+      font-size:clamp(12.5px,3.6vw,14px);line-height:1.45;
+      color:var(--muted);margin-top:8px;
+    }
+    .sub b{color:var(--text);font-weight:700}
+
+    .cta{
+      display:flex;align-items:center;justify-content:center;gap:9px;
+      width:100%;min-height:56px;margin-top:14px;padding:15px 20px;
+      background:linear-gradient(180deg,var(--hot) 0%,#e56d00 100%);
+      color:#fff;
+      font:700 clamp(15px,4.4vw,17px)/1.15 "Sora",sans-serif;
+      letter-spacing:.02em;text-transform:uppercase;
+      text-decoration:none;border-radius:14px;
+      box-shadow:0 10px 30px rgba(255,122,0,.35);
+      transition:transform .15s ease,filter .15s ease;
+      -webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none;
+      animation:breathe 2.2s ease-in-out infinite;cursor:pointer;
+    }
+    .cta:active{transform:scale(.98);filter:brightness(.97)}
+    @keyframes breathe{
+      0%,100%{box-shadow:0 10px 30px rgba(255,122,0,.35);transform:translateY(0)}
+      50%{box-shadow:0 14px 42px rgba(255,122,0,.55);transform:translateY(-2px)}
+    }
+
+    .guard{
+      display:flex;align-items:center;justify-content:center;gap:7px;
+      margin-top:10px;padding:9px 12px;border-radius:11px;
+      background:rgba(37,211,102,.09);border:1px solid rgba(37,211,102,.32);
+      font-size:12.5px;font-weight:600;color:var(--text);line-height:1.35;
+    }
+    .guard b{color:var(--ok);font-weight:700}
+
+    .legal{
+      display:flex;align-items:center;justify-content:center;gap:7px;
+      margin-top:10px;font-size:11px;font-weight:600;color:var(--muted);
+    }
+    .legal .age{
+      display:inline-grid;place-items:center;
+      min-width:28px;height:20px;padding:0 5px;border-radius:5px;
+      background:#c62828;color:#fff;font-weight:700;font-size:11px;
+    }
+    .legal a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+
+    /* aparelho baixinho (ou paisagem): aperta os respiros antes de cortar nada */
+    @media (max-height:620px){
+      .pitch{padding-top:10px}
+      .cta{min-height:50px;margin-top:11px}
+      .guard{margin-top:8px;padding:7px 10px;font-size:11.5px}
+      .legal{margin-top:7px}
+      .topbar{padding:7px 4px 6px}
+    }
+    @media (prefers-reduced-motion:reduce){.cta{animation:none}}
+  </style>
+
+  <script src="config.js"></script>
+
+  <!-- ===== Meta Pixel ===== -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','23904277939190271');
+    fbq('init','2392917637871836');
+    fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=23904277939190271&ev=PageView&noscript=1" alt="" /><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2392917637871836&ev=PageView&noscript=1" alt="" /></noscript>
+
+  <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+  <main class="screen">
+
+    <div class="topbar">
+      <span>🛡️ Proteção válida só até o jogo começar</span>
+      <span class="clock" id="clock">--:--:--</span>
+    </div>
+
+    <div class="art" id="art">
+      <img id="art-img" src="" alt="" fetchpriority="high" decoding="async" />
+    </div>
+
+    <div class="pitch">
+      <h1><span class="de">De <span id="de">R$ 30</span></span> pra <span class="para" id="para">R$ 3.000</span></h1>
+      <p class="sub" id="linha">O mesmo bilhete que a sua casa paga odd 10. Aqui tá odd 100.</p>
+
+      <a id="cta" class="cta" href="#" rel="noopener">Pegar o bilhete</a>
+
+      <p class="guard">🛡️ <span>Deu red? <b id="guard-txt">Reembolso em até 48h no Pix</b></span></p>
+
+      <p class="legal">
+        <span class="age">+18</span> Jogue com responsabilidade
+        <a id="suporte" href="#" rel="noopener">Deu red? Suporte</a>
+      </p>
+    </div>
+
+  </main>
+
+  <script>
+    (function(){
+      "use strict";
+      var C = window.LP_CONFIG || {};
+
+      /* ===== Arte ===== */
+      var art = document.getElementById("art");
+      var img = document.getElementById("art-img");
+      art.style.setProperty("--art-fit", C.arteAjuste === "cover" ? "cover" : "contain");
+
+      function semArte(){
+        if (img.parentNode) img.remove();
+        art.classList.add("vazio");
+        art.textContent = "espaço da arte — coloque o arquivo em /assets e aponte em config.js";
+      }
+      if (!C.arte) { semArte(); }
+      else { img.addEventListener("error", semArte); img.src = C.arte; }
+
+      /* ===== Textos ===== */
+      function set(id, txt){ if (txt != null) document.getElementById(id).textContent = txt; }
+      set("de", C.de);
+      set("para", C.para);
+      set("linha", C.linha);
+      set("cta", C.ctaLabel);
+      if (C.prazoReembolso) {
+        document.getElementById("guard-txt").textContent = "Reembolso em até " + C.prazoReembolso + " no Pix";
+      }
+      if (C.para) document.title = "De " + (C.de || "") + " pra " + C.para;
+
+      /* ===== Cronômetro ===== */
+      var clock = document.getElementById("clock");
+      var target = C.deadline ? new Date(C.deadline).getTime() : 0;
+      function pad(n){ return String(n).padStart(2,"0"); }
+      function tick(){
+        if (!target) { clock.textContent = ""; return; }
+        var diff = target - Date.now();
+        if (diff <= 0){ clock.textContent = "jogo iniciado"; return; }
+        var h = Math.floor(diff/3600000), m = Math.floor(diff/60000)%60, s = Math.floor(diff/1000)%60;
+        clock.textContent = (h>=24 ? Math.floor(h/24)+"d " : "") + pad(h%24)+":"+pad(m)+":"+pad(s);
+        setTimeout(tick, 1000);
+      }
+      tick();
+
+      /* ===== Link + evento ===== */
+      var p   = new URLSearchParams(location.search);
+      var uS  = p.get("utm_source")   || "direct";
+      var uC  = p.get("utm_campaign") || "organic";
+      var uCt = p.get("utm_content")  || "default";
+      var uM  = p.get("utm_medium")   || "";
+
+      var destino = C.link || "#";
+      if (C.repassarParametros && location.search) {
+        destino += (destino.indexOf("?") === -1 ? "?" : "&") + location.search.slice(1);
+      }
+
+      var eventId = "lead_" + Date.now() + "_" + Math.random().toString(36).slice(2,10);
+      var fired = false;
+      function fire(){
+        if (fired) return; fired = true;
+        if (typeof window.fbq === "function") {
+          window.fbq("track","Lead",{content_name:"30 pra 3000",content_category:uC,source:uS,utm_medium:uM,utm_content:uCt},{eventID:eventId});
+        }
+        if (typeof window.va === "function") {
+          window.va("event",{name:"clique_3000",data:{source:uS,campaign:uC,content:uCt,medium:uM}});
+        }
+      }
+
+      var cta = document.getElementById("cta");
+      cta.href = destino; cta.target = "_blank"; cta.rel = "noopener";
+      cta.addEventListener("pointerdown", fire, {passive:true});
+      cta.addEventListener("click", fire);
+
+      var sup = document.getElementById("suporte");
+      if (C.linkSuporte) {
+        sup.href = C.linkSuporte; sup.target = "_blank"; sup.rel = "noopener";
+        sup.addEventListener("click", function(){
+          if (typeof window.fbq === "function") window.fbq("trackCustom","RefundRequest",{content_name:"30 pra 3000"});
+        });
+      } else { sup.remove(); }
+    })();
+  </script>
+
+  <script>
+    (function(){
+      var HUB='https://hub-omega-sooty.vercel.app';
+      fetch(HUB+'/api/track',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({page:'3000',event:'pageview',referrer:document.referrer}),
+        keepalive:true
+      }).catch(function(){});
+    })();
+  </script>
+</body>
+</html>

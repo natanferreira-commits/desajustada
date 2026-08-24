@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" width="1080" height="1920">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a1a08"/>
+      <stop offset="60%" stop-color="#171a21"/>
+      <stop offset="100%" stop-color="#0f1116"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1920" rx="48" fill="url(#g)"/>
+  <rect x="24" y="24" width="1032" height="1872" rx="36" fill="none"
+        stroke="#ff7a00" stroke-opacity=".4" stroke-width="5" stroke-dasharray="22 16"/>
+
+  <text x="540" y="240" text-anchor="middle" fill="#ff9d33" font-family="Impact,sans-serif" font-size="76">ESPACO DA ARTE</text>
+  <text x="540" y="320" text-anchor="middle" fill="#a5acb8" font-family="Arial,sans-serif" font-size="40">1080 x 1920 — vertical</text>
+  <text x="540" y="386" text-anchor="middle" fill="#5b6270" font-family="Arial,sans-serif" font-size="36">assets/arte-30k.jpg</text>
+
+  <!-- moldura dos dois bilhetes, so pra indicar o que a arte precisa carregar -->
+  <g fill="none" stroke="#262b34" stroke-width="4">
+    <rect x="120" y="520" width="840" height="480" rx="28"/>
+    <rect x="120" y="1080" width="840" height="480" rx="28"/>
+  </g>
+  <text x="540" y="780" text-anchor="middle" fill="#5b6270" font-family="Arial,sans-serif" font-size="44">bilhete na casa grande — odd 10</text>
+  <text x="540" y="1340" text-anchor="middle" fill="#ff9d33" font-family="Arial,sans-serif" font-size="44">o mesmo bilhete aqui — odd 100</text>
+
+  <text x="540" y="1740" text-anchor="middle" fill="#5b6270" font-family="Arial,sans-serif" font-size="34">a arte aparece inteira (contain), nada e cortado</text>
+</svg>
