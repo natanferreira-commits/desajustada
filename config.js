@@ -37,16 +37,19 @@ window.LP_CONFIG = {
   // Deixe '' pra não mostrar contagem nenhuma.
   deadline: '',
 
-  link: 'https://record.betwarrioraffiliates.bet/_xW2WawVor-n-dmz6Y9QluGNd7ZgqdRLk/19/??coupon=combination|4292788997,4292789098,4293977048,4292758440,4292761151,4292755856|0|replace',
+  link: 'https://link.arenaaffiliates.com.br/X4FNK9Y',
 
-  // Suporte / pedido de reembolso. Deixe '' pra esconder o link.
-  linkSuporte: 'https://t.me/suportecaumobot?start=6a871fc6f017077da5066e79',
+  // Sem link de suporte nesta campanha: vazio remove o link do rodape.
+  linkSuporte: '',
 
   /* ===== RODAPÉ ===== */
   termos: 'Proteção promocional independente da casa de apostas, exclusiva para contas novas criadas no mesmo dia através desta página e limitada a uma aposta por pessoa neste bilhete. Devolução via Pix em até 48h mediante comprovante de criação da conta no dia e print do bilhete redado. Apostas esportivas envolvem risco e não existe ganho garantido. Aposte apenas o que você pode perder.',
 
   // Repassa utm_* e fbclid pro link da casa.
-  // Desligado: o link tem '??coupon=' e anexar '&utm_...' precisa de um
-  // teste rápido pra confirmar que o cupom continua carregando montado.
+  // O link atual é um encurtador limpo (sem query string), então anexar
+  // '?utm_source=...' é seguro — não há cupom pra quebrar. Ligar isso faz
+  // a origem do clique chegar na plataforma de afiliado.
+  // Desligado só porque muda o comportamento do link: ligue quando quiser
+  // fechar a atribuição.
   repassarParametros: false
 };
