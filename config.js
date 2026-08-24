@@ -43,7 +43,10 @@ window.LP_CONFIG = {
   // Deixe '' pra não mostrar contagem nenhuma.
   deadline: '',
 
-  link: 'https://link.arenaaffiliates.com.br/X4FNK9Y',
+  // Link de tracking da BetWarrior com o cupom da combinada montado.
+  // O trecho depois de 'coupon=' carrega as 6 seleções do bilhete: mexer
+  // nele troca a aposta que abre no app da casa.
+  link: 'https://record.betwarrioraffiliates.bet/_xW2WawVor-leQiruUYVtU2Nd7ZgqdRLk/12/??coupon=combination|4305933478,4305933359,4287937689,4287937707,4287937653,4287961466|0|replace',
 
   // Sem link de suporte nesta campanha: vazio remove o link do rodape.
   linkSuporte: '',
@@ -53,10 +56,9 @@ window.LP_CONFIG = {
   termos: 'Apostas esportivas envolvem risco e não existe ganho garantido. As odds podem mudar ou sair do ar a qualquer momento. Aposte apenas o que você pode perder. Conteúdo destinado a maiores de 18 anos. Este site não faz parte do Facebook Inc. nem é endossado pelo Facebook de nenhuma maneira.',
 
   // Repassa utm_* e fbclid pro link da casa.
-  // O link atual é um encurtador limpo (sem query string), então anexar
-  // '?utm_source=...' é seguro — não há cupom pra quebrar. Ligar isso faz
-  // a origem do clique chegar na plataforma de afiliado.
-  // Desligado só porque muda o comportamento do link: ligue quando quiser
-  // fechar a atribuição.
+  // ATENÇÃO: o link agora tem query string (o cupom da combinada). Se
+  // ligar isso, o código anexa '&utm_source=...' no fim, depois do
+  // 'coupon='. Testa o link resultante numa aba antes de deixar ligado:
+  // se a casa não gostar do parâmetro extra, o bilhete abre vazio.
   repassarParametros: false
 };
