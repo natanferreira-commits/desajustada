@@ -30,10 +30,12 @@ window.LP_CONFIG = {
   /* ===== CAMPANHA ===== */
   ctaLabel: 'Quero esse bilhete',
 
-  // Horário do primeiro jogo. Vira o "sai do ar em HH:MM:SS" ao lado do selo.
+  // Contagem regressiva. Desligada — hoje a página não mostra prazo nenhum.
+  // Pra ligar, coloque o horário do primeiro jogo em ISO com fuso, ex:
+  // '2026-08-26T18:00:00-03:00' — vira "sai do ar em HH:MM:SS" ao lado do selo.
   // Quando o prazo passa, a contagem some e o selo continua "disponível".
   // Deixe '' pra não mostrar contagem nenhuma.
-  deadline: '2026-08-26T18:00:00-03:00',
+  deadline: '',
 
   link: 'https://record.betwarrioraffiliates.bet/_xW2WawVor-n-dmz6Y9QluGNd7ZgqdRLk/19/??coupon=combination|4292788997,4292789098,4293977048,4292758440,4292761151,4292755856|0|replace',
 
