@@ -33,7 +33,7 @@ window.LP_CONFIG = {
   // Horário do primeiro jogo. Vira o "sai do ar em HH:MM:SS" ao lado do selo.
   // Quando o prazo passa, a contagem some e o selo continua "disponível".
   // Deixe '' pra não mostrar contagem nenhuma.
-  deadline: '2026-08-23T16:00:00-03:00',
+  deadline: '2026-08-26T18:00:00-03:00',
 
   link: 'https://record.betwarrioraffiliates.bet/_xW2WawVor-n-dmz6Y9QluGNd7ZgqdRLk/19/??coupon=combination|4292788997,4292789098,4293977048,4292758440,4292761151,4292755856|0|replace',
 
