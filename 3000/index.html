@@ -48,10 +48,33 @@
     .topbar{
       flex:0 0 auto;
       display:flex;align-items:center;justify-content:center;gap:8px;
-      padding:9px 4px 8px;
-      font-size:11.5px;font-weight:600;color:var(--muted);
+      flex-wrap:wrap;
+      padding:clamp(6px,1.2svh,10px) 4px;
     }
-    .topbar .clock{font-variant-numeric:tabular-nums;color:var(--hot-2);font-weight:700}
+    /* selo de status — sinaliza que o bilhete está de pé agora */
+    .selo{
+      display:inline-flex;align-items:center;gap:7px;
+      padding:5px 11px;border-radius:999px;
+      background:rgba(37,211,102,.12);
+      border:1px solid rgba(37,211,102,.42);
+      font-size:11px;font-weight:700;letter-spacing:.07em;
+      text-transform:uppercase;color:var(--ok);
+      white-space:nowrap;
+    }
+    .selo .dot{
+      width:7px;height:7px;border-radius:50%;background:var(--ok);
+      animation:pulse 1.8s cubic-bezier(0,0,.2,1) infinite;
+    }
+    @keyframes pulse{
+      0%{box-shadow:0 0 0 0 rgba(37,211,102,.6)}
+      70%{box-shadow:0 0 0 8px rgba(37,211,102,0)}
+      100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
+    }
+    .clock{
+      font-size:11px;font-weight:600;color:var(--muted);
+      font-variant-numeric:tabular-nums;white-space:nowrap;
+    }
+    .clock b{color:var(--hot-2);font-weight:700}
 
     /* ===== Arte (os bilhetes moram aqui) ===== */
     .art{
@@ -72,24 +95,27 @@
       color:#5b6270;font-size:12.5px;text-align:center;padding:16px;
     }
 
-    /* ===== Pitch ===== */
-    .pitch{flex:0 0 auto;padding-top:14px;text-align:center}
+    /* ===== Pitch =====
+       Os respiros são em svh: em tela baixa tudo aperta sozinho e
+       sobra altura pra arte, em tela alta o texto respira. */
+    .pitch{flex:0 0 auto;padding-top:clamp(6px,1.1svh,10px);text-align:center}
     h1{
       font-family:"Anton",Impact,sans-serif;font-weight:400;
-      font-size:clamp(28px,8.6vw,40px);line-height:1.05;
+      font-size:clamp(26px,8.2vw,36px);line-height:1.02;
       text-transform:uppercase;letter-spacing:.01em;
     }
     h1 .de{color:var(--muted)}
     h1 .para{color:var(--hot);text-shadow:0 0 26px rgba(255,122,0,.5)}
     .sub{
-      font-size:clamp(12.5px,3.6vw,14px);line-height:1.45;
-      color:var(--muted);margin-top:8px;
+      font-size:clamp(11.5px,3.3vw,13px);line-height:1.38;
+      color:var(--muted);margin-top:clamp(4px,.7svh,6px);
     }
     .sub b{color:var(--text);font-weight:700}
 
     .cta{
       display:flex;align-items:center;justify-content:center;gap:9px;
-      width:100%;min-height:56px;margin-top:14px;padding:15px 20px;
+      width:100%;min-height:clamp(48px,6.2svh,54px);
+      margin-top:clamp(8px,1.2svh,11px);padding:13px 20px;
       background:linear-gradient(180deg,var(--hot) 0%,#e56d00 100%);
       color:#fff;
       font:700 clamp(15px,4.4vw,17px)/1.15 "Sora",sans-serif;
@@ -106,17 +132,18 @@
       50%{box-shadow:0 14px 42px rgba(255,122,0,.55);transform:translateY(-2px)}
     }
 
-    .guard{
+    /* faixa de reforço logo abaixo do CTA */
+    .strip{
       display:flex;align-items:center;justify-content:center;gap:7px;
-      margin-top:10px;padding:9px 12px;border-radius:11px;
-      background:rgba(37,211,102,.09);border:1px solid rgba(37,211,102,.32);
-      font-size:12.5px;font-weight:600;color:var(--text);line-height:1.35;
+      margin-top:clamp(6px,.9svh,8px);padding:clamp(6px,.9svh,8px) 12px;
+      border-radius:11px;
+      background:rgba(255,122,0,.08);border:1px solid rgba(255,122,0,.28);
+      font-size:11.5px;font-weight:600;color:var(--text);line-height:1.3;
     }
-    .guard b{color:var(--ok);font-weight:700}
 
     .legal{
       display:flex;align-items:center;justify-content:center;gap:7px;
-      margin-top:10px;font-size:11px;font-weight:600;color:var(--muted);
+      margin-top:clamp(5px,.8svh,8px);font-size:10.5px;font-weight:600;color:var(--muted);
     }
     .legal .age{
       display:inline-grid;place-items:center;
@@ -125,15 +152,13 @@
     }
     .legal a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
 
-    /* aparelho baixinho (ou paisagem): aperta os respiros antes de cortar nada */
-    @media (max-height:620px){
-      .pitch{padding-top:10px}
-      .cta{min-height:50px;margin-top:11px}
-      .guard{margin-top:8px;padding:7px 10px;font-size:11.5px}
-      .legal{margin-top:7px}
-      .topbar{padding:7px 4px 6px}
+    /* caso extremo (paisagem, teclado aberto): melhor rolar do que cortar o CTA */
+    @media (max-height:480px){
+      body{overflow:auto}
+      .screen{height:auto;min-height:100dvh}
+      .art{min-height:150px}
     }
-    @media (prefers-reduced-motion:reduce){.cta{animation:none}}
+    @media (prefers-reduced-motion:reduce){.cta,.selo .dot{animation:none}}
   </style>
 
   <script src="config.js"></script>
@@ -155,8 +180,8 @@
   <main class="screen">
 
     <div class="topbar">
-      <span>🛡️ Proteção válida só até o jogo começar</span>
-      <span class="clock" id="clock">--:--:--</span>
+      <span class="selo"><span class="dot"></span><span id="selo-txt">Bilhete disponível</span></span>
+      <span class="clock" id="clock"></span>
     </div>
 
     <div class="art" id="art">
@@ -169,11 +194,11 @@
 
       <a id="cta" class="cta" href="#" rel="noopener">Pegar o bilhete</a>
 
-      <p class="guard">🛡️ <span>Deu red? <b id="guard-txt">Reembolso em até 48h no Pix</b></span></p>
+      <p class="strip" id="strip">⚡ Bilhete já montado — é só abrir e apostar</p>
 
       <p class="legal">
         <span class="age">+18</span> Jogue com responsabilidade
-        <a id="suporte" href="#" rel="noopener">Deu red? Suporte</a>
+        <a id="suporte" href="#" rel="noopener">Suporte</a>
       </p>
     </div>
 
@@ -203,21 +228,22 @@
       set("para", C.para);
       set("linha", C.linha);
       set("cta", C.ctaLabel);
-      if (C.prazoReembolso) {
-        document.getElementById("guard-txt").textContent = "Reembolso em até " + C.prazoReembolso + " no Pix";
-      }
+      set("selo-txt", C.selo);
+      set("strip", C.rodape);
       if (C.para) document.title = "De " + (C.de || "") + " pra " + C.para;
 
-      /* ===== Cronômetro ===== */
-      var clock = document.getElementById("clock");
+      /* ===== Contagem =====
+         O selo fica sempre "disponível". A contagem é só um reforço ao lado,
+         e some quando o prazo passa — a página nunca diz que a pessoa
+         chegou tarde, que é o jeito mais rápido de perder o clique. */
+      var clock  = document.getElementById("clock");
       var target = C.deadline ? new Date(C.deadline).getTime() : 0;
       function pad(n){ return String(n).padStart(2,"0"); }
       function tick(){
-        if (!target) { clock.textContent = ""; return; }
         var diff = target - Date.now();
-        if (diff <= 0){ clock.textContent = "jogo iniciado"; return; }
+        if (!target || diff <= 0){ clock.textContent = ""; return; }
         var h = Math.floor(diff/3600000), m = Math.floor(diff/60000)%60, s = Math.floor(diff/1000)%60;
-        clock.textContent = (h>=24 ? Math.floor(h/24)+"d " : "") + pad(h%24)+":"+pad(m)+":"+pad(s);
+        clock.textContent = "sai do ar em " + (h>=24 ? Math.floor(h/24)+"d " : "") + pad(h%24)+":"+pad(m)+":"+pad(s);
         setTimeout(tick, 1000);
       }
       tick();
@@ -255,7 +281,7 @@
       if (C.linkSuporte) {
         sup.href = C.linkSuporte; sup.target = "_blank"; sup.rel = "noopener";
         sup.addEventListener("click", function(){
-          if (typeof window.fbq === "function") window.fbq("trackCustom","RefundRequest",{content_name:"30 pra 3000"});
+          if (typeof window.fbq === "function") window.fbq("trackCustom","SupportClick",{content_name:"30 pra 3000"});
         });
       } else { sup.remove(); }
     })();
