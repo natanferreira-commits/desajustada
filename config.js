@@ -8,7 +8,7 @@ window.LP_CONFIG = {
   /* ===== ARTE (o miolo da página) ===== */
   // A arte carrega os bilhetes. Vertical, ideal 1080x1620 (2:3).
   // Evite 1080x1920: nessa caixa o 9:16 sobra barra preta nas laterais.
-  arte: 'assets/arte-placeholder.svg',
+  arte: 'assets/arte-30k.png',
 
   // 'contain' = arte inteira sempre visível (recomendado, os bilhetes não cortam)
   // 'cover'   = arte preenche a caixa toda, mas corta as bordas
