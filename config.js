@@ -14,6 +14,12 @@ window.LP_CONFIG = {
   // 'cover'   = arte preenche a caixa toda, mas corta as bordas
   arteAjuste: 'contain',
 
+  /* ===== ABA DO NAVEGADOR =====
+     Título que aparece na aba e quando o link é compartilhado.
+     Sem valor em dinheiro aqui de propósito: o que fica exposto é
+     a aba do celular de quem abriu, não a oferta. */
+  tituloAba: 'Bilhete do dia',
+
   /* ===== SELO DO TOPO ===== */
   // Fica sempre aceso. Não vira "expirado" quando o prazo passa.
   selo: 'Bilhete disponível',
