@@ -79,24 +79,31 @@
        O preto da arte é o mesmo preto do fundo, então a emenda não
        aparece e a tela lê como uma imagem só. */
     .art{
-      position:absolute;top:0;left:0;right:0;bottom:0;
-      z-index:0;overflow:hidden;pointer-events:none;
+      flex:1 1 auto;min-height:0;
+      /* Elástica de novo: ela cede altura quando o texto precisa, então o
+         bloco de venda nunca sobe por cima dos bilhetes. Foi exatamente
+         isso que quebrou quando a arte tinha altura fixa. */
+      position:relative;overflow:hidden;
+      margin-left:-16px;margin-right:-16px;   /* ponta a ponta, fura o padding */
+      /* Teto: acima da altura natural da arte na largura cheia o cover
+         começaria a comer a borda lateral dos bilhetes. */
+      max-height:min(150vw,690px);
     }
     .art img{
-      position:absolute;top:0;left:0;
       width:100%;height:100%;display:block;
-      object-fit:var(--art-fit,contain);
-      object-position:50% 0;              /* âncora no topo */
+      object-fit:var(--art-fit,cover);
+      /* Quando falta altura, o corte tira mais do topo do que da base.
+         Prioridade são os bilhetes: eles são a prova da oferta. Em tela
+         pequena o que se perde é o alto do cabelo, e não o rosto. */
+      object-position:50% 42%;
     }
-    /* Véu de baixo: segura a leitura do texto sobre a foto e mata a
-       emenda entre o fim da arte e o fundo da página. Começa abaixo dos
-       bilhetes, então não suja a informação que importa. */
+    /* Véu de baixo: só amacia o corte da arte contra o fundo. Curto de
+       propósito, pra não escurecer os bilhetes. */
     .art::after{
-      content:"";position:absolute;left:0;right:0;bottom:0;height:46%;
+      content:"";position:absolute;left:0;right:0;bottom:0;height:18%;
       background:linear-gradient(180deg,
         rgba(11,12,16,0) 0%,
-        rgba(11,12,16,.42) 55%,
-        rgba(11,12,16,.8) 100%);
+        rgba(11,12,16,.55) 100%);
       pointer-events:none;z-index:1;
     }
     /* Glow por cima da arte. A intensidade fica no --glow: 1 e o padrao,
@@ -119,9 +126,6 @@
       color:#5b6270;font-size:12px;text-align:center;padding:14px;
     }
 
-    /* Sobra elástica: empurra o bloco de venda pro pé da tela, agora que
-       a arte saiu do fluxo. É o que mantém a página em tela única. */
-    .espaco{flex:1 1 auto;min-height:0}
 
     /* ===== Headline =====
        --sobe levanta o bloco de venda inteiro (headline + odds + botão).
@@ -129,8 +133,8 @@
        bloco sem tirar o rodapé do pé da tela. */
     .pitch{
       position:relative;z-index:2;
-      flex:0 0 auto;padding-top:clamp(7px,1.2svh,11px);text-align:center;
-      margin-bottom:var(--sobe,46px);
+      flex:0 0 auto;padding-top:clamp(12px,2.1svh,19px);text-align:center;
+      margin-bottom:var(--sobe,clamp(6px,1.4svh,14px));
     }
     h1{
       font-family:"Anton",Impact,sans-serif;font-weight:400;
@@ -234,10 +238,16 @@
     .rodape a{color:#5b6270;text-decoration:underline;text-underline-offset:2px}
 
     /* caso extremo (paisagem, teclado aberto): melhor rolar do que cortar o CTA */
-    @media (max-height:520px){
+    /* Tela baixa (paisagem, teclado aberto, celular antigo). Abaixo disso
+       a arte seria espremida a ponto de cortar os bilhetes. Melhor deixar
+       rolar do que entregar a prova da oferta pela metade. */
+    @media (max-height:600px){
       body{overflow:auto}
       .screen{height:auto;min-height:100dvh}
-      .pitch{margin-bottom:0}              /* tela baixa: nada de subir o bloco */
+      /* trava no piso: sem crescer, pra a rolagem ficar curta e o botão
+         continuar perto da dobra */
+      .art{flex:0 0 auto;height:min(78vw,359px);min-height:0;max-height:none}
+      .pitch{margin-bottom:0}
     }
     @media (prefers-reduced-motion:reduce){
       .selo .dot,.cta::after{animation:none}
@@ -272,8 +282,6 @@
       <img id="art-img" src="" alt="" fetchpriority="high" decoding="async" />
       <span class="glow"></span>
     </div>
-
-    <div class="espaco"></div>
 
     <div class="pitch">
       <h1 id="headline">De R$ 30 pra <span class="prize">R$ 3.000</span></h1>
