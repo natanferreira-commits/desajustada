@@ -252,6 +252,12 @@
       /* Teto em vez de altura fixa: com height a arte nao cedia espaco e o
          rodape saia cortado quando a headline crescia. */
       .art{flex:1 1 auto;min-height:0;max-height:min(78vw,359px)}
+      /* Tela baixa nao cabe rosto e bilhete ao mesmo tempo. O corte desce
+         pra garantir a linha de valores do bilhete, que e a prova da
+         oferta — perde-se o alto da cabeca, nao o numero. */
+      .art img{object-position:50% 50%}
+      /* Headline um pouco menor aqui devolve altura pra arte. */
+      h1{font-size:clamp(34px,12vw,44px)}
       .pitch{margin-bottom:0}
     }
     @media (prefers-reduced-motion:reduce){
