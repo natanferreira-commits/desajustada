@@ -12,7 +12,15 @@ window.LP_CONFIG = {
 
   // 'contain' = arte inteira sempre visível (recomendado, os bilhetes não cortam)
   // 'cover'   = arte preenche a caixa toda, mas corta as bordas
-  arteAjuste: 'cover',  // preenche a caixa; o corte é vertical, os bilhetes ficam inteiros
+  arteAjuste: 'cover',
+
+  // Enquadramento vertical da arte de fundo. Menor puxa a imagem pra
+  // cima, maior puxa pra baixo. Ex: '30%', '42%', '55%'.
+  arteFoco: '38%',
+
+  // Quanto puxar a arte pra cima, em % da altura da tela. Sobe os
+  // bilhetes pra eles nao ficarem atras da headline. 0 desliga.
+  arteSubir: '17%',  // preenche a caixa; o corte é vertical, os bilhetes ficam inteiros
 
   /* ===== ABA DO NAVEGADOR =====
      Título que aparece na aba e quando o link é compartilhado.
