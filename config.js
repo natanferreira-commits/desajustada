@@ -6,8 +6,9 @@
 window.LP_CONFIG = {
 
   /* ===== ARTE (o miolo da página) ===== */
-  // A arte carrega os bilhetes. Vertical, ideal 1080x1620 (2:3).
-  // Evite 1080x1920: nessa caixa o 9:16 sobra barra preta nas laterais.
+  // Arte vertical 1080x1920. Ela aparece inteira, sem corte lateral.
+  // O conteudo dela (fita, rosto, bilhetes) precisa terminar ate ~60%
+  // da altura: abaixo disso mora o texto da pagina.
   arte: 'assets/arte-100.webp',
 
   // 'contain' = arte inteira sempre visível (recomendado, os bilhetes não cortam)
@@ -20,7 +21,7 @@ window.LP_CONFIG = {
 
   // Quanto puxar a arte pra cima, em % da altura da tela. Sobe os
   // bilhetes pra eles nao ficarem atras da headline. 0 desliga.
-  arteSubir: '0%',  // preenche a caixa; o corte é vertical, os bilhetes ficam inteiros
+  arteSubir: '0%',
 
   /* ===== ABA DO NAVEGADOR =====
      Título que aparece na aba e quando o link é compartilhado.
