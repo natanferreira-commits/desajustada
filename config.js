@@ -27,7 +27,7 @@ window.LP_CONFIG = {
   /* ===== HEADLINE =====
      O trecho entre *asteriscos* sai em laranja.
      Esta campanha NÃO tem reembolso: nada de "dinheiro de volta" aqui. */
-  headline: 'De R$ 30 pra *R$ 3.000*',
+  headline: 'De R$ 100 pra *R$ 10.000*',
 
   /* ===== COMPARAÇÃO DE ODD ===== */
   oddDe: 'odd 13.50',
