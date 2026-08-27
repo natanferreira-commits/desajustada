@@ -12,15 +12,15 @@ window.LP_CONFIG = {
 
   // 'contain' = arte inteira sempre visível (recomendado, os bilhetes não cortam)
   // 'cover'   = arte preenche a caixa toda, mas corta as bordas
-  arteAjuste: 'cover',
+  arteAjuste: 'contain',
 
   // Enquadramento vertical da arte de fundo. Menor puxa a imagem pra
   // cima, maior puxa pra baixo. Ex: '30%', '42%', '55%'.
-  arteFoco: '38%',
+  arteFoco: '0%',
 
   // Quanto puxar a arte pra cima, em % da altura da tela. Sobe os
   // bilhetes pra eles nao ficarem atras da headline. 0 desliga.
-  arteSubir: '17%',  // preenche a caixa; o corte é vertical, os bilhetes ficam inteiros
+  arteSubir: '7%',  // preenche a caixa; o corte é vertical, os bilhetes ficam inteiros
 
   /* ===== ABA DO NAVEGADOR =====
      Título que aparece na aba e quando o link é compartilhado.
@@ -55,7 +55,7 @@ window.LP_CONFIG = {
   // Link de tracking da BetWarrior com o cupom da combinada montado.
   // O trecho depois de 'coupon=' carrega as 6 seleções do bilhete: mexer
   // nele troca a aposta que abre no app da casa.
-  link: 'https://record.betwarrioraffiliates.bet/_xW2WawVor-leQiruUYVtU2Nd7ZgqdRLk/12/??coupon=combination|4305933478,4305933359,4287937689,4287937707,4287937653,4287961466|0|replace',
+  link: 'https://record.betwarrioraffiliates.bet/_xW2WawVor-lrEWHH-KemJWNd7ZgqdRLk/16/??coupon=combination|4305177706,4305177534,4305160228,4305224442,4305227257,4305224360,4305719582,4305719695,4305719588|0|replace',
 
   // Sem link de suporte nesta campanha: vazio remove o link do rodape.
   linkSuporte: '',
