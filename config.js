@@ -22,12 +22,13 @@ window.LP_CONFIG = {
 
   /* ===== SELO DO TOPO ===== */
   // Fica sempre aceso. Não vira "expirado" quando o prazo passa.
-  selo: 'Bilhete disponível',
+  selo: '',
 
   /* ===== HEADLINE =====
      O trecho entre *asteriscos* sai em laranja.
+     Use \n (barra + n) pra quebrar a linha.
      Esta campanha NÃO tem reembolso: nada de "dinheiro de volta" aqui. */
-  headline: 'De R$ 100 pra *R$ 10.000*',
+  headline: 'De R$ 100 pra\n*R$ 10.000*',
 
   /* ===== COMPARAÇÃO DE ODD ===== */
   oddDe: 'odd 13.50',
