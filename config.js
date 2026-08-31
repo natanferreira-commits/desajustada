@@ -54,9 +54,9 @@ window.LP_CONFIG = {
   deadline: '',
 
   // Link de tracking da BetWarrior com o cupom da combinada montado.
-  // O trecho depois de 'coupon=' carrega as 6 seleções do bilhete: mexer
+  // O trecho depois de 'coupon=' carrega as 9 seleções do bilhete: mexer
   // nele troca a aposta que abre no app da casa.
-  link: 'https://record.betwarrioraffiliates.bet/_xW2WawVor-lrEWHH-KemJWNd7ZgqdRLk/16/??coupon=combination|4305177706,4305177534,4305160228,4305224442,4305227257,4305224360,4305719582,4305719695,4305719588|0|replace',
+  link: 'https://record.betwarrioraffiliates.bet/_xW2WawVor-leQiruUYVtU2Nd7ZgqdRLk/12/??coupon=combination|4314332505,4314313386,4314332729,4314195336,4314175095,4314195334,4318730233,4318745263,4318730167|0|replace',
 
   // Sem link de suporte nesta campanha: vazio remove o link do rodape.
   linkSuporte: '',
