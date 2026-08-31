@@ -37,7 +37,7 @@ window.LP_CONFIG = {
      O trecho entre *asteriscos* sai em laranja.
      Use \n (barra + n) pra quebrar a linha.
      Esta campanha NÃO tem reembolso: nada de "dinheiro de volta" aqui. */
-  headline: 'De R$ 100 pra\n*R$ 10.000*',
+  headline: 'De R$ 10 pra\n*R$ 1.000*',
 
   /* ===== COMPARAÇÃO DE ODD ===== */
   oddDe: 'odd 10.59',
