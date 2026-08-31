@@ -9,7 +9,7 @@ window.LP_CONFIG = {
   // Arte vertical 1080x1920. Ela aparece inteira, sem corte lateral.
   // O conteudo dela (fita, rosto, bilhetes) precisa terminar ate ~60%
   // da altura: abaixo disso mora o texto da pagina.
-  arte: 'assets/arte-100.webp',
+  arte: 'assets/arte-30.webp',
 
   // 'contain' = arte inteira sempre visível (recomendado, os bilhetes não cortam)
   // 'cover'   = arte preenche a caixa toda, mas corta as bordas
@@ -40,8 +40,8 @@ window.LP_CONFIG = {
   headline: 'De R$ 10 pra\n*R$ 1.000*',
 
   /* ===== COMPARAÇÃO DE ODD ===== */
-  oddDe: 'odd 10.59',
-  oddPara: 'odd 139.8',
+  oddDe: 'odd 13.50',
+  oddPara: 'odd 102.7',
 
   /* ===== CAMPANHA ===== */
   ctaLabel: 'Quero esse bilhete',
