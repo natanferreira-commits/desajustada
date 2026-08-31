@@ -13,7 +13,7 @@ window.LP_CONFIG = {
 
   // 'contain' = arte inteira sempre visível (recomendado, os bilhetes não cortam)
   // 'cover'   = arte preenche a caixa toda, mas corta as bordas
-  arteAjuste: 'contain',
+  arteAjuste: 'cover',
 
   // Enquadramento vertical da arte de fundo. Menor puxa a imagem pra
   // cima, maior puxa pra baixo. Ex: '30%', '42%', '55%'.
